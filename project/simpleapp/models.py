@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
+from django.db.models import Sum
+
 
 
 # Товар для нашей витрины
@@ -14,7 +17,7 @@ class Product(models.Model):
     )
     # поле категории будет ссылаться на модель категории
     category = models.ForeignKey(
-        to='Category',
+        to='CategoryName',
         on_delete=models.CASCADE,
         related_name='products', # все продукты в категории будут доступны через поле products
     )
@@ -27,7 +30,7 @@ class Product(models.Model):
 
 
 # Категория, к которой будет привязываться товар
-class Category(models.Model):
+class CategoryName(models.Model):
     # названия категорий тоже не должны повторяться
     name = models.CharField(max_length=100, unique=True)
 
